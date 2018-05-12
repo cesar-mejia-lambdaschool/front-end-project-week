@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { CSVLink } from 'react-csv'
 import './NavBar.css'
 
+import React, { Component } from 'react'
 class NavBar extends Component {
   render () {
     return (
@@ -48,7 +48,6 @@ class NavBar extends Component {
         >
           Logout
         </Link>
-        [![js-standard-style](https://cdn.rawgit.com/standard/standard/master/badge.svg)](http://standardjs.com)
       </div>
     )
   }
