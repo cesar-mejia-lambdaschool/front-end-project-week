@@ -4,8 +4,8 @@ import axios from 'axios'
 import { Button } from 'reactstrap'
 import './Register.css'
 
-const serverURL = 'https://lambda-notes-server.herokuapp.com'
-// const serverURL = 'http://localhost:5000'
+// const serverURL = 'https://lambda-notes-server.herokuapp.com'
+const serverURL = 'http://localhost:5000'
 
 class Register extends React.Component {
   state = {
@@ -53,16 +53,16 @@ class Register extends React.Component {
     this.setState({ [name]: value })
   }
 
-  submitHandler = (event) => {
+  submitHandler = event => {
     event.preventDefault()
     axios
       .post(`${serverURL}/api/register`, this.state)
-      .then((response) => {
+      .then(response => {
         console.log(response.data)
         this.props.onRegister(response.data)
         this.props.history.push('/')
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('ERROR You are not authorized', err)
       })
   }

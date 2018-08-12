@@ -4,11 +4,11 @@ import { Container, Badge } from 'reactstrap'
 import axios from 'axios'
 
 import './CreateNote.css'
-const serverURL = 'https://lambda-notes-server.herokuapp.com'
-// const serverURL = 'http://localhost:5000'
+// const serverURL = 'https://lambda-notes-server.herokuapp.com'
+const serverURL = 'http://localhost:5000'
 
 class CreateNote extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       tags: [],
@@ -45,14 +45,14 @@ class CreateNote extends Component {
       )
       .then((res) => {
         this.setState({
-          tags: [ value, ...this.state.tags ],
+          tags: [value, ...this.state.tags],
           tag: ''
         })
       })
       .catch((err) => console.log(err))
   }
 
-  render () {
+  render() {
     return (
       <Container fluid className='CreateNote px-0'>
         <form className='form-group mx-3 flex-column create-form'>
