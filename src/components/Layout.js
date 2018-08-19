@@ -15,15 +15,12 @@ import './Layout.css'
 // const serverURL = 'https://lambda-notes-server.herokuapp.com'
 const serverURL = 'http://localhost:5000'
 class Layout extends Component {
-  constructor () {
-    super()
-    this.state = {
-      notes: [],
-      title: '',
-      content: '',
-      username: '',
-      loading: false
-    }
+  state = {
+    notes: [],
+    title: '',
+    content: '',
+    username: '',
+    loading: false
   }
 
   componentDidMount () {
@@ -34,13 +31,13 @@ class Layout extends Component {
     const token = localStorage.getItem('authorization')
     axios
       .get(`${serverURL}/api/notes`, { headers: { authorization: token } })
-      .then((res) => {
+      .then(res => {
         this.setState({
           notes: res.data.notes,
           username: res.data.username
         })
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
   }
 
   clearState = () => {
@@ -64,7 +61,7 @@ class Layout extends Component {
       .post(`${serverURL}/api/notes`, note, {
         headers: { authorization: token }
       })
-      .then((res) => {
+      .then(res => {
         console.log('res', res.data)
         this.setState({
           notes: res.data,
@@ -72,20 +69,20 @@ class Layout extends Component {
           content: ''
         })
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
   }
 
-  deleteNote = (id) => {
+  deleteNote = id => {
     axios
       .delete(`${serverURL}/api/notes/${id}`, {
         headers: {
           authorization: localStorage.getItem('authorization')
         }
       })
-      .then((res) => {
+      .then(res => {
         this.setState({ notes: res.data })
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
   }
 
   updateNote = (note, tags) => {
@@ -97,28 +94,28 @@ class Layout extends Component {
       .put(`${serverURL}/api/notes/${note._id}`, updateNote, {
         headers: { authorization: localStorage.getItem('authorization') }
       })
-      .then((res) => {
+      .then(res => {
         this.setState({
           notes: res.data,
           title: '',
           content: ''
         })
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
   }
 
-  newTitle = (event) => {
+  newTitle = event => {
     this.setState({
       title: event.target.value
     })
   }
 
-  newContent = (event) => {
+  newContent = event => {
     this.setState({
       content: event.target.value
     })
   }
-  registerSuccess = (data) => {
+  registerSuccess = data => {
     console.log(data)
     localStorage.setItem('authorization', `Bearer ${data.token}`)
     this.getNotes()
@@ -140,7 +137,7 @@ class Layout extends Component {
         <Route
           exact
           path='/'
-          render={(props) => (
+          render={props => (
             <ListNotes
               notes={this.state.notes}
               username={this.state.username}
@@ -151,7 +148,7 @@ class Layout extends Component {
 
         <Route
           path='/create'
-          render={(props) => (
+          render={props => (
             <CreateNote
               newTitle={this.newTitle}
               newContent={this.newContent}
@@ -164,11 +161,11 @@ class Layout extends Component {
 
         <Route
           path='/view/:id'
-          render={(props) => (
+          render={props => (
             <ViewNote
               note={
                 this.state.notes.filter(
-                  (note) => note._id == props.match.params.id // eslint-disable-line
+                  note => note._id == props.match.params.id // eslint-disable-line
                 )[0]
               }
               deleteNote={this.deleteNote}
@@ -178,11 +175,11 @@ class Layout extends Component {
 
         <Route
           path='/update/:id'
-          render={(props) => (
+          render={props => (
             <UpdateNote
               note={
                 this.state.notes.filter(
-                  (note) => note._id == props.match.params.id // eslint-disable-line
+                  note => note._id == props.match.params.id // eslint-disable-line
                 )[0]
               }
               newTitle={this.newTitle}
@@ -195,11 +192,11 @@ class Layout extends Component {
         />
         <Route
           path='/register'
-          render={(props) => <Register onRegister={this.registerSuccess} />}
+          render={props => <Register onRegister={this.registerSuccess} />}
         />
         <Route
           path='/login'
-          render={(props) => <Login onLogin={this.registerSuccess} />}
+          render={props => <Login onLogin={this.registerSuccess} />}
         />
       </div>
     )
