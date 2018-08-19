@@ -8,7 +8,7 @@ import './CreateNote.css'
 const serverURL = 'http://localhost:5000'
 
 class CreateNote extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       tags: [],
@@ -16,20 +16,20 @@ class CreateNote extends Component {
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault()
     console.log('in handle submit')
     this.props.createNote(event, this.state.tags)
     this.props.history.push('/')
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       tag: event.target.value
     })
   }
 
-  handleTag = (e) => {
+  handleTag = e => {
     e.preventDefault()
     const value = this.state.tag
 
@@ -43,16 +43,16 @@ class CreateNote extends Component {
           }
         }
       )
-      .then((res) => {
+      .then(res => {
         this.setState({
           tags: [value, ...this.state.tags],
           tag: ''
         })
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
   }
 
-  render() {
+  render () {
     return (
       <Container fluid className='CreateNote px-0'>
         <form className='form-group mx-3 flex-column create-form'>
@@ -89,7 +89,7 @@ class CreateNote extends Component {
                 key={tag + index}
                 onClick={() => {
                   this.setState({
-                    tags: this.state.tags.filter((curTag) => tag !== curTag)
+                    tags: this.state.tags.filter(curTag => tag !== curTag)
                   })
                 }}
               >

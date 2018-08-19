@@ -59,7 +59,7 @@ class ListNotes extends Component {
 
   render () {
     const { search } = this.state
-    const filteredNotes = this.props.notes.filter((note) => {
+    const filteredNotes = this.props.notes.filter(note => {
       return (
         note.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
         note.content.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
@@ -73,12 +73,12 @@ class ListNotes extends Component {
           ? filteredNotes.slice(index, index + numOfCols)
           : null
       })
-      .filter((x) => x != null)
+      .filter(x => x != null)
 
     return (
       <section className='ListNotes m-0 p-0'>
-        {this.props.username ? (
-          <input
+        {this.props.username
+          ? <input
             type='text'
             className='search-bar'
             placeholder='search'
@@ -86,7 +86,7 @@ class ListNotes extends Component {
             value={this.state.search}
             onChange={this.onSearch}
           />
-        ) : null}
+          : null}
         <Modal
           className='modal-modal'
           isOpen={!this.state.loggedIn}
@@ -113,40 +113,38 @@ class ListNotes extends Component {
             </Button>
           </ModalFooter>
         </Modal>
-        {this.props.username ? (
-          <h2 className='list_h2'>
+        {this.props.username
+          ? <h2 className='list_h2'>
             {this.props.username.charAt(0).toUpperCase() +
-              this.props.username.substr(1).toLowerCase()}'s Notes:{' '}
+                this.props.username.substr(1).toLowerCase()}
+              's Notes:
+            {' '}
           </h2>
-        ) : null}
+          : null}
 
         <Container fluid className='notes p-0 m-0'>
           {filteredNoteGrid.map((miniNoteArray, index) => {
             return (
               <Row key={index} className='row-notes p-0 m-0 mb-2'>
-                {miniNoteArray.map((note) => (
+                {miniNoteArray.map(note => (
                   <Col className='card col-notes p-0 mx-2' key={note._id}>
                     <div className='card-body m-0 p-1'>
                       <Link className='card-title' to={`/view/${note._id}`}>
                         <h4 className='card-title px-2'>
-                          {note.title.length >= 13 ? (
-                            note.title.substr(0, 13) + ' ...'
-                          ) : (
-                            note.title
-                          )}
+                          {note.title.length >= 13
+                            ? note.title.substr(0, 13) + ' ...'
+                            : note.title}
                         </h4>
                       </Link>
                       <span className='card-text px-2'>
-                        {note.content.length >= 175 ? (
-                          note.content.substr(0, 175) + ' ...'
-                        ) : (
-                          note.content
-                        )}
+                        {note.content.length >= 175
+                          ? note.content.substr(0, 175) + ' ...'
+                          : note.content}
                       </span>
                     </div>
                     <div className='card-footer m-0 px-0 py-1'>
-                      {note.tags.length < 5 ? (
-                        note.tags.map((tag, index) => (
+                      {note.tags.length < 5
+                        ? note.tags.map((tag, index) => (
                           <Badge
                             pill
                             color='primary'
@@ -159,8 +157,7 @@ class ListNotes extends Component {
                             {tag}
                           </Badge>
                         ))
-                      ) : (
-                        note.tags.reverse().slice(0, 4).map((tag, index) => (
+                        : note.tags.reverse().slice(0, 4).map((tag, index) => (
                           <Badge
                             pill
                             color='primary'
@@ -169,8 +166,7 @@ class ListNotes extends Component {
                           >
                             {tag}
                           </Badge>
-                        ))
-                      )}
+                        ))}
                     </div>
                   </Col>
                 ))}

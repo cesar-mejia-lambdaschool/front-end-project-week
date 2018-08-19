@@ -13,7 +13,7 @@ class Login extends React.Component {
     password: ''
   }
 
-  render() {
+  render () {
     return (
       <div className='Login'>
         <h2>Login: </h2>
@@ -49,16 +49,16 @@ class Login extends React.Component {
     this.setState({ [name]: value })
   }
 
-  submitHandler = (event) => {
+  submitHandler = event => {
     event.preventDefault()
 
     axios
       .post(`${serverURL}/api/login`, this.state)
-      .then((response) => {
+      .then(response => {
         this.props.onLogin(response.data)
         this.props.history.push('/')
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('ERROR You are not authorized', err)
       })
   }

@@ -52,10 +52,8 @@ class Layout extends Component {
   createNote = (event, tags) => {
     event.preventDefault()
     const token = localStorage.getItem('authorization')
-    const note = {}
-    note.title = this.state.title
-    note.content = this.state.content
-    note.tags = tags
+    const { title, content } = this.state
+    const note = { title, content, tags }
     console.log(note)
     axios
       .post(`${serverURL}/api/notes`, note, {
