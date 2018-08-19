@@ -1,0 +1,8 @@
+export const FETCH_NOTES = 'FETCH_NOTES'
+export const FETCH_NOTE = 'FETCH_NOTE'
+export const CREATE_NOTE = 'CREATE_NOTE'
+export const READ_NOTE = 'READ_NOTE'
+export const UPDATE_NOTE = 'UPDATE_NOTE'
+export const DELETE_NOTE = 'DELETE_NOTE'
+export const FETCHING_NOTES = 'FETCHING_NOTES'
+export const FETCHING_NOTE = 'FETCHING_NOTE'

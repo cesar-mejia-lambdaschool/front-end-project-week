@@ -84,9 +84,10 @@ class Layout extends Component {
   }
 
   updateNote = (note, tags) => {
+    const { title, content } = this.state
     const updateNote = {}
-    updateNote.title = this.state.title || note.title
-    updateNote.content = this.state.content || note.content
+    updateNote.title = title || note.title
+    updateNote.content = content || note.content
     updateNote.tags = tags
     axios
       .put(`${serverURL}/api/notes/${note._id}`, updateNote, {

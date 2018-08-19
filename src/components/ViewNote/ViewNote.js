@@ -69,11 +69,11 @@ class ViewNote extends Component {
         </p>
         <hr />
         <section>
-          {this.props.note.tags.map((tag, index) =>
+          {this.props.note.tags.map((tag, index) => (
             <Badge pill color='primary' className='ml-1' key={tag + index}>
               {tag}
             </Badge>
-          )}
+          ))}
         </section>
       </div>
     )
