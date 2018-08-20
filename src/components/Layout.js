@@ -124,7 +124,7 @@ class Layout extends Component {
     this.clearState()
     localStorage.clear()
   }
-
+  // random comment
   render () {
     return (
       <div className='Layout'>
