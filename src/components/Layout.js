@@ -54,7 +54,6 @@ class Layout extends Component {
     const token = localStorage.getItem('authorization')
     const { title, content } = this.state
     const note = { title, content, tags }
-    console.log(note)
     axios
       .post(`${serverURL}/api/notes`, note, {
         headers: { authorization: token }
@@ -115,7 +114,6 @@ class Layout extends Component {
     })
   }
   registerSuccess = data => {
-    console.log(data)
     localStorage.setItem('authorization', `Bearer ${data.token}`)
     this.getNotes()
   }

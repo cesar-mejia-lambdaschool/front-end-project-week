@@ -60,17 +60,6 @@ class ListNotes extends Component {
           .indexOf(search.toLowerCase()) !== -1
       )
     })
-<<<<<<< HEAD
-    const numOfCols = 4
-    const filteredNoteGrid = filteredNotes
-      .map((note, index) => {
-        return index % numOfCols === 0
-          ? filteredNotes.slice(index, index + numOfCols)
-          : null
-      })
-      .filter(x => x != null)
-=======
->>>>>>> react-front-end
 
     return (
       <section className='ListNotes m-0 p-0'>
@@ -115,59 +104,6 @@ class ListNotes extends Component {
             {this.props.username.charAt(0).toUpperCase() +
                 this.props.username.substr(1).toLowerCase()}
               's Notes:
-<<<<<<< HEAD
-            {' '}
-          </h2>
-          : null}
-
-        <Container fluid className='notes p-0 m-0'>
-          {filteredNoteGrid.map((miniNoteArray, index) => {
-            return (
-              <Row key={index} className='row-notes p-0 m-0 mb-2'>
-                {miniNoteArray.map(note => (
-                  <Col className='card col-notes p-0 mx-2' key={note._id}>
-                    <div className='card-body m-0 p-1'>
-                      <Link className='card-title' to={`/view/${note._id}`}>
-                        <h4 className='card-title px-2'>
-                          {note.title.length >= 13
-                            ? note.title.substr(0, 13) + ' ...'
-                            : note.title}
-                        </h4>
-                      </Link>
-                      <span className='card-text px-2'>
-                        {note.content.length >= 175
-                          ? note.content.substr(0, 175) + ' ...'
-                          : note.content}
-                      </span>
-                    </div>
-                    <div className='card-footer m-0 px-0 py-1'>
-                      {note.tags.length < 5
-                        ? note.tags.map((tag, index) => (
-                          <Badge
-                            pill
-                            color='primary'
-                            className='ml-1 badge-tag'
-                            key={tag + index}
-                            onClick={() => {
-                              this.setState({ search: tag })
-                            }}
-                          >
-                            {tag}
-                          </Badge>
-                        ))
-                        : note.tags.reverse().slice(0, 4).map((tag, index) => (
-                          <Badge
-                            pill
-                            color='primary'
-                            className='ml-1 badge-tag'
-                            key={tag + index}
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                    </div>
-                  </Col>
-=======
           </h2>
           : null}
 
@@ -201,7 +137,6 @@ class ListNotes extends Component {
                   >
                     {tag.value}
                   </Badge>
->>>>>>> react-front-end
                 ))}
               </div>
             </div>

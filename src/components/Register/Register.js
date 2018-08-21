@@ -58,7 +58,6 @@ class Register extends React.Component {
     axios
       .post(`${serverURL}/api/register`, this.state)
       .then(response => {
-        console.log(response.data)
         this.props.onRegister(response.data)
         this.props.history.push('/')
       })

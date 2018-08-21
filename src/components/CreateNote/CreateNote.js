@@ -16,7 +16,6 @@ class CreateNote extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('in handle submit')
     this.props.createNote(event, this.state.tags)
     this.props.history.push('/')
   }
