@@ -91,7 +91,7 @@ class Layout extends Component {
     updateNote.content = this.state.content || note.content
     updateNote.tags = tags
     axios
-      .put(`${serverURL}/api/notes/${note._id}`, updateNote, {
+      .put(`${serverURL}/api/notes/${note.id}`, updateNote, {
         headers: { authorization: localStorage.getItem('authorization') }
       })
       .then(res => {
@@ -123,7 +123,7 @@ class Layout extends Component {
 
   componentWillMount () {
     this.clearState()
-    localStorage.clear()
+    // localStorage.clear()
   }
   // random comment
   render () {
@@ -165,7 +165,7 @@ class Layout extends Component {
             <ViewNote
               note={
                 this.state.notes.filter(
-                  note => note._id == props.match.params.id // eslint-disable-line
+                  note => note.id == props.match.params.id // eslint-disable-line
                 )[0]
               }
               deleteNote={this.deleteNote}
@@ -179,7 +179,7 @@ class Layout extends Component {
             <UpdateNote
               note={
                 this.state.notes.filter(
-                  note => note._id == props.match.params.id // eslint-disable-line
+                  note => note.id == props.match.params.id // eslint-disable-line
                 )[0]
               }
               newTitle={this.newTitle}
