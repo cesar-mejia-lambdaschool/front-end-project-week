@@ -18,22 +18,22 @@ class UpdateNote extends Component {
     this.props.history.push('/')
   }
 
-  handleTag = (e) => {
+  handleTag = e => {
     e.preventDefault()
     const value = this.state.tag
     this.setState({
-      tags: [ value, ...this.state.tags ],
+      tags: [value, ...this.state.tags],
       tag: ''
     })
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       tag: event.target.value
     })
   }
   componentDidMount () {
-    this.setState({ tags: this.props.note.tags })
+    this.setState({ tags: this.props.note.tags.map(tag => tag.value) })
   }
   render () {
     return (
@@ -76,7 +76,7 @@ class UpdateNote extends Component {
                 key={tag + index}
                 onClick={() => {
                   this.setState({
-                    tags: this.state.tags.filter((curTag) => tag !== curTag)
+                    tags: this.state.tags.filter(curTag => tag !== curTag)
                   })
                 }}
               >

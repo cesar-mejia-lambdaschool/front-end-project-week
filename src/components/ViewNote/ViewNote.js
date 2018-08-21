@@ -15,7 +15,7 @@ class ViewNote extends Component {
   }
 
   handleDelete (event) {
-    this.props.deleteNote(this.props.note._id)
+    this.props.deleteNote(this.props.note.id)
     this.props.history.push('/')
   }
 
@@ -29,7 +29,7 @@ class ViewNote extends Component {
     return (
       <div className='ViewNote'>
         <div className='note-form'>
-          <Link className='note-edit' to={`/update/${this.props.note._id}`}>
+          <Link className='note-edit' to={`/update/${this.props.note.id}`}>
             edit
           </Link>
           <button className='note-delete' onClick={this.toggle}>
@@ -70,8 +70,13 @@ class ViewNote extends Component {
         <hr />
         <section>
           {this.props.note.tags.map((tag, index) => (
-            <Badge pill color='primary' className='ml-1' key={tag + index}>
-              {tag}
+            <Badge
+              pill
+              color='primary'
+              className='ml-1'
+              key={tag.value + index}
+            >
+              {tag.value}
             </Badge>
           ))}
         </section>

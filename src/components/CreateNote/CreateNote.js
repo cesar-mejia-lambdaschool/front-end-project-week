@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Container, Badge } from 'reactstrap'
-import axios from 'axios'
 
 import './CreateNote.css'
 // const serverURL = 'https://lambda-notes-server.herokuapp.com'
-const serverURL = 'http://localhost:5000'
 
 class CreateNote extends Component {
   constructor (props) {
@@ -33,23 +31,10 @@ class CreateNote extends Component {
     e.preventDefault()
     const value = this.state.tag
 
-    axios
-      .post(
-        `${serverURL}/api/tags`,
-        { value },
-        {
-          headers: {
-            authorization: localStorage.getItem('authorization')
-          }
-        }
-      )
-      .then(res => {
-        this.setState({
-          tags: [value, ...this.state.tags],
-          tag: ''
-        })
-      })
-      .catch(err => console.log(err))
+    this.setState({
+      tags: [value, ...this.state.tags],
+      tag: ''
+    })
   }
 
   render () {

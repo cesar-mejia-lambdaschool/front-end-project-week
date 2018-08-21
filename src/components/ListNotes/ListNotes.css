@@ -21,7 +21,10 @@
   }
 }
 
-/* .notes {
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly
 }
 
 .row-notes {
@@ -30,9 +33,13 @@
 .col-notes {
 } */
 
+#Card {
+  width: 250px;
+}
+
 .card {
-  max-width: 300px !important;
-  height: 300px;
+  width: 250px !important;
+  height: 250px !important;
   border: 1px solid RGB(174, 174, 174);
   background-color: white;
 }
