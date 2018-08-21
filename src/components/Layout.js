@@ -59,7 +59,6 @@ class Layout extends Component {
         headers: { authorization: token }
       })
       .then(res => {
-        console.log('res', res.data)
         this.setState({
           notes: res.data,
           title: '',
@@ -122,7 +121,6 @@ class Layout extends Component {
     this.clearState()
     // localStorage.clear()
   }
-  // random comment
   render () {
     return (
       <div className='Layout'>
@@ -142,7 +140,6 @@ class Layout extends Component {
             />
           )}
         />
-
         <Route
           path='/create'
           render={props => (
@@ -155,7 +152,6 @@ class Layout extends Component {
             />
           )}
         />
-
         <Route
           path='/view/:id'
           render={props => (
@@ -169,7 +165,6 @@ class Layout extends Component {
             />
           )}
         />
-
         <Route
           path='/update/:id'
           render={props => (
