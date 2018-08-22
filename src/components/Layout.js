@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import NavBar from './NavBar/NavBar'
@@ -116,10 +116,11 @@ class Layout extends Component {
     this.props.fetchNotes()
   }
 
-  componentWillMount () {
-    // this.props.clearState()
-    // localStorage.clear()
-  }
+  // componentWillMount () {
+  //   // this.props.clearState()
+  //   // localStorage.clear()
+  // }
+
   render () {
     return (
       <div className='Layout'>
@@ -189,11 +190,13 @@ const mapStateToProps = ({ notes, note, username }) => {
   }
 }
 
-export default connect(mapStateToProps, {
-  fetchNotes,
-  fetchNote,
-  createNote,
-  deleteNote,
-  updateNote,
-  clearState
-})(Layout)
+export default withRouter(
+  connect(mapStateToProps, {
+    fetchNotes,
+    fetchNote,
+    createNote,
+    deleteNote,
+    updateNote,
+    clearState
+  })(Layout)
+)

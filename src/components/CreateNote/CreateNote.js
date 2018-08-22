@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Badge } from 'reactstrap'
+import { withRouter } from 'react-router-dom'
 
 import './CreateNote.css'
 // const serverURL = 'https://lambda-notes-server.herokuapp.com'
@@ -107,4 +108,4 @@ class CreateNote extends Component {
   }
 }
 
-export default CreateNote
+export default withRouter(CreateNote)
