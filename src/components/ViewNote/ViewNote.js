@@ -80,10 +80,10 @@ class ViewNote extends Component {
                 color='primary'
                 className='ml-1'
                 key={tag.value + index}
-                >
+              >
                 {tag.value}
               </Badge>
-              ))
+            ))
             : null}
         </section>
       </div>

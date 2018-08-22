@@ -1,15 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
-import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Badge,
-  Button
-} from 'reactstrap'
+import { Modal, ModalBody, ModalFooter, Button, Badge } from 'reactstrap'
 
 import { clearState, fetchNotes } from '../../actions'
 import './ListNotes.css'
@@ -70,7 +63,7 @@ class ListNotes extends Component {
     return (
       <section className='ListNotes m-0 p-0'>
         {this.props.username
-          ? <Fragment style={{ display: 'flex' }}>
+          ? <div style={{ display: 'flex' }}>
             <input
               type='text'
               className='search-bar'
@@ -82,7 +75,7 @@ class ListNotes extends Component {
             <Button onClick={() => this.setState({ search: '' })}>
                 CLEAR
             </Button>
-          </Fragment>
+          </div>
           : null}
         <Modal
           className='modal-modal'
