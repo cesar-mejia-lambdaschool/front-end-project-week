@@ -63,7 +63,7 @@ class ListNotes extends Component {
     return (
       <section className='ListNotes m-0 p-0'>
         {this.props.username
-          ? <div style={{ display: 'flex' }}>
+          ? <div style={{ display: 'flex', justifyContent: 'center' }}>
             <input
               type='text'
               className='search-bar'
@@ -72,7 +72,11 @@ class ListNotes extends Component {
               value={this.state.search}
               onChange={this.onSearch}
             />
-            <Button onClick={() => this.setState({ search: '' })}>
+            <Button
+              style={{ margin: '0 10px' }}
+              color='primary'
+              onClick={() => this.setState({ search: '' })}
+            >
                 CLEAR
             </Button>
           </div>
