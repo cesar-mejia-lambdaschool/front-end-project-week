@@ -10,10 +10,11 @@ import {
   UPDATE_NOTE
 } from './types'
 
-const serverURL = 'http://localhost:5000'
-const token = localStorage.getItem('authorization')
+const serverURL = 'https://secure-waters-21665.herokuapp.com/'
 
 export const fetchNotes = () => async dispatch => {
+  const token = localStorage.getItem('authorization')
+
   const res = await axios.get(`${serverURL}/api/notes`, {
     headers: { authorization: token }
   })
@@ -22,12 +23,16 @@ export const fetchNotes = () => async dispatch => {
 }
 
 export const fetchNote = id => async dispatch => {
+  const token = localStorage.getItem('authorization')
+
   const res = await axios.get(`${serverURL}/api/notes/${id}`, {
     headers: { authorization: token }
   })
   dispatch({ type: FETCH_NOTE, payload: res.data })
 }
 export const createNote = note => async dispatch => {
+  const token = localStorage.getItem('authorization')
+
   const res = await axios.post(`${serverURL}/api/notes`, note, {
     headers: { authorization: token }
   })
@@ -36,14 +41,18 @@ export const createNote = note => async dispatch => {
 }
 
 export const deleteNote = id => async dispatch => {
-  const res = axios.delete(`${serverURL}/api/notes/${id}`, {
+  const token = localStorage.getItem('authorization')
+
+  const res = await axios.delete(`${serverURL}/api/notes/${id}`, {
     headers: { authorization: token }
   })
-
+  console.log('delete data', res.data)
   dispatch({ type: DELETE_NOTE, payload: res.data })
 }
 
 export const updateNote = note => async dispatch => {
+  const token = localStorage.getItem('authorization')
+
   const res = await axios.put(`${serverURL}/api/notes/${note.id}`, note, {
     headers: { authorization: token }
   })

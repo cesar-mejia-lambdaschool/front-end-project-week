@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import jwtDecode from 'jwt-decode'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import jwtDecode from 'jwt-decode'
 import { Modal, ModalBody, ModalFooter, Button, Badge } from 'reactstrap'
 
+import { clearState, fetchNotes } from '../../actions'
 import './ListNotes.css'
 
 class ListNotes extends Component {
@@ -144,4 +146,7 @@ class ListNotes extends Component {
   }
 }
 
-export default ListNotes
+const mapStateToProps = ({ username, notes }) => {
+  return { username, notes }
+}
+export default connect(mapStateToProps, { clearState, fetchNotes })(ListNotes)

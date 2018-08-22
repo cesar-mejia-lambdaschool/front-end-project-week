@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Modal, ModalBody, ModalFooter, Badge } from 'reactstrap'
 
+import { deleteNote, fetchNote } from '../../actions'
 import './ViewNote.css'
 
 class ViewNote extends Component {
@@ -10,6 +12,7 @@ class ViewNote extends Component {
   }
 
   handleDelete = event => {
+    event.preventDefault()
     this.props.deleteNote(this.props.match.params.id)
     this.props.history.push('/')
   }
@@ -21,9 +24,8 @@ class ViewNote extends Component {
   }
 
   componentWillMount () {
-    this.props.fetchNote(this.props.match.params.id)
+    this.props.fetchNote(this.props.match.params.id).then(x => {})
   }
-
   render () {
     return (
       <div className='ViewNote'>
@@ -71,20 +73,24 @@ class ViewNote extends Component {
         </p>
         <hr />
         <section>
-          {this.props.note.tags.map((tag, index) => (
-            <Badge
-              pill
-              color='primary'
-              className='ml-1'
-              key={tag.value + index}
-            >
-              {tag.value}
-            </Badge>
-          ))}
+          {this.props.note.tags
+            ? this.props.note.tags.map((tag, index) => (
+              <Badge
+                pill
+                color='primary'
+                className='ml-1'
+                key={tag.value + index}
+                >
+                {tag.value}
+              </Badge>
+              ))
+            : null}
         </section>
       </div>
     )
   }
 }
-
-export default ViewNote
+const mapStateToProps = ({ note }) => {
+  return { note }
+}
+export default connect(mapStateToProps, { deleteNote, fetchNote })(ViewNote)

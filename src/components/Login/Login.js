@@ -1,10 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import { Button } from 'reactstrap'
+
+import { fetchNotes } from '../../actions'
 import './Login.css'
 
 // const serverURL = 'https://lambda-notes-server.herokuapp.com'
-const serverURL = 'http://localhost:5000'
+const serverURL = 'https://secure-waters-21665.herokuapp.com/'
 
 class Login extends React.Component {
   state = {
@@ -36,7 +39,7 @@ class Login extends React.Component {
             />
           </div>
           <div className='form-row'>
-            <Button color='primary'>Login</Button>
+            <Button color='primary' type='submit'>Login</Button>
           </div>
         </form>
       </div>
@@ -54,8 +57,16 @@ class Login extends React.Component {
     axios
       .post(`${serverURL}/api/login`, this.state)
       .then(response => {
-        this.props.onLogin(response.data)
+        localStorage.setItem('authorization', `Bearer ${response.data.token}`)
+        console.log('in first then')
+      })
+      .then(x => {
+        this.props.fetchNotes()
+        console.log('in second then')
+      })
+      .then(x => {
         this.props.history.push('/')
+        console.log('in 3rd then')
       })
       .catch(err => {
         console.log('ERROR You are not authorized', err)
@@ -63,4 +74,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default connect(null, { fetchNotes })(Login)

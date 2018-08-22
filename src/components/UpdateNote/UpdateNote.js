@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Badge } from 'reactstrap'
 
+import { updateNote, fetchNote } from '../../actions'
 import './UpdateNote.css'
 class UpdateNote extends Component {
   state = {
@@ -13,9 +15,10 @@ class UpdateNote extends Component {
   handleUpdate = event => {
     event.preventDefault()
     const { title, content, tags } = this.state
-    const note = { title, content, tags }
-    this.props.updateNote(note)
-    this.props.history.push('/')
+    const note = { title, content, tags, id: this.props.match.params.id }
+    this.props.updateNote(note).then(x => {
+      this.props.history.push('/')
+    })
   }
 
   handleTag = e => {
@@ -34,12 +37,13 @@ class UpdateNote extends Component {
     })
   }
 
-  componentWillMount () {
-    this.props.fetchNote(this.props.match.params.id)
-    this.setState({
-      tags: this.props.note.tags.map(tag => tag.value),
-      content: this.props.note.content,
-      title: this.props.note.title
+  componentDidMount () {
+    this.props.fetchNote(this.props.match.params.id).then(x => {
+      this.setState({
+        tags: this.props.note.tags.map(tag => tag.value),
+        content: this.props.note.content,
+        title: this.props.note.title
+      })
     })
   }
   render () {
@@ -111,4 +115,7 @@ class UpdateNote extends Component {
   }
 }
 
-export default UpdateNote
+const mapStateToProps = ({ note }) => {
+  return { note }
+}
+export default connect(mapStateToProps, { updateNote, fetchNote })(UpdateNote)

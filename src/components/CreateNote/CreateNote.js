@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Container, Badge } from 'reactstrap'
-import { withRouter } from 'react-router-dom'
 
+import { createNote } from '../../actions'
 import './CreateNote.css'
-// const serverURL = 'https://lambda-notes-server.herokuapp.com'
 
 class CreateNote extends Component {
   state = {
@@ -108,4 +108,4 @@ class CreateNote extends Component {
   }
 }
 
-export default withRouter(CreateNote)
+export default connect(null, { createNote })(CreateNote)
