@@ -10,7 +10,7 @@ import {
   UPDATE_NOTE
 } from './types'
 
-const serverURL = 'https://secure-waters-21665.herokuapp.com/'
+const serverURL = 'https://secure-waters-21665.herokuapp.com'
 
 export const fetchNotes = () => async dispatch => {
   const token = localStorage.getItem('authorization')
