@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import jwtDecode from 'jwt-decode'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Modal, ModalBody, ModalFooter, Button, Badge } from 'reactstrap'
 
 import './ListNotes.css'
 
 class ListNotes extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      loggedIn: false,
-      loading: false,
-      search: ''
-    }
+  state = {
+    loggedIn: false,
+    loading: false,
+    search: ''
   }
 
   componentWillMount () {
@@ -146,4 +143,5 @@ class ListNotes extends Component {
     )
   }
 }
-export default withRouter(ListNotes)
+
+export default ListNotes

@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import './Login.css'
 
@@ -64,4 +63,4 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login)
+export default Login

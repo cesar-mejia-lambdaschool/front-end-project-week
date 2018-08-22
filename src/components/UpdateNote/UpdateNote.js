@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import { Badge } from 'reactstrap'
-import './UpdateNote.css'
 
+import './UpdateNote.css'
 class UpdateNote extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      tags: [],
-      tag: ''
-    }
+  state = {
+    tags: [],
+    tag: '',
+    title: '',
+    content: ''
   }
 
-  handleUpdate (event) {
+  handleUpdate = event => {
     event.preventDefault()
-    this.props.updateNote(this.props.note, this.state.tags)
+    const { title, content, tags } = this.state
+    const note = { title, content, tags }
+    this.props.updateNote(note)
     this.props.history.push('/')
   }
 
@@ -27,35 +27,44 @@ class UpdateNote extends Component {
     })
   }
 
-  handleChange = event => {
+  handleChange = ({ target }) => {
+    const { name, value } = target
     this.setState({
-      tag: event.target.value
+      [name]: value
     })
   }
-  componentDidMount () {
-    this.setState({ tags: this.props.note.tags.map(tag => tag.value) })
+
+  componentWillMount () {
+    this.props.fetchNote(this.props.match.params.id)
+    this.setState({
+      tags: this.props.note.tags.map(tag => tag.value),
+      content: this.props.note.content,
+      title: this.props.note.title
+    })
   }
   render () {
     return (
       <div className='UpdateNote'>
         <form
           className='update-form form-group mx-3'
-          onSubmit={this.handleUpdate.bind(this)}
+          onSubmit={this.handleUpdate}
         >
           <label className='input-label'>
             <h2 className='label-h2'>Edit Note:</h2>
           </label>
           <input
             required
+            name='title'
             className='input-title form-control'
             type='text'
             placeholder='Note Title'
-            value={this.props.title || this.props.note.title}
-            onChange={this.props.newTitle}
+            value={this.state.title}
+            onChange={this.handleChange}
           />
           <section>
             <label className='label-tag'>Add Tag:</label>
             <input
+              name='tag'
               className='input-tag'
               type='text'
               placeholder='Note Tag'
@@ -86,11 +95,12 @@ class UpdateNote extends Component {
           </section>
           <textarea
             required
+            name='content'
             className='input-body form-control'
             type='text'
             placeholder='Note Content'
-            value={this.props.content || this.props.note.content}
-            onChange={this.props.newContent}
+            value={this.state.content}
+            onChange={this.handleChange}
           />
           <button className='sav-btn' type='submit'>
             Update
@@ -101,4 +111,4 @@ class UpdateNote extends Component {
   }
 }
 
-export default withRouter(UpdateNote)
+export default UpdateNote

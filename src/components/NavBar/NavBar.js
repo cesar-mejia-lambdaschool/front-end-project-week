@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CSVLink } from 'react-csv'
+
+import { clearState } from '../../actions'
 import './NavBar.css'
 
 class NavBar extends Component {
@@ -37,9 +40,7 @@ class NavBar extends Component {
           Download Notes
         </CSVLink>
         <Link
-          className={`nav-btn logout-btn ${!this.props.username
-            ? 'nav-btn-invis'
-            : ''}`}
+          className={`nav-btn logout-btn ${!this.props.username ? 'nav-btn-invis' : ''}`}
           to={`/login`}
           onClick={() => {
             localStorage.clear()
@@ -53,4 +54,8 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar
+const mapStateToProps = ({ notes, username }) => {
+  return { notes, username }
+}
+
+export default connect(mapStateToProps, { clearState })(NavBar)

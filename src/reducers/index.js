@@ -1,6 +1,13 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
 
-const rootReducer = combineReducers({})
+import noteReducer from './noteReducer'
+import usernameReducer from './usernameReducer'
+import singleReducer from './singleReducer'
+
+const rootReducer = combineReducers({
+  notes: noteReducer,
+  note: singleReducer,
+  username: usernameReducer
+})
 
 export default rootReducer

@@ -1,28 +1,35 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import { Container, Badge } from 'reactstrap'
 
 import './CreateNote.css'
 // const serverURL = 'https://lambda-notes-server.herokuapp.com'
 
 class CreateNote extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      tags: [],
-      tag: ''
-    }
+  state = {
+    tags: [],
+    tag: '',
+    title: '',
+    content: ''
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.createNote(event, this.state.tags)
+    const { title, content, tags } = this.state
+    const note = { title, content, tags }
+    this.props.createNote(note)
+    this.setState({
+      tags: [],
+      tag: '',
+      title: '',
+      content: ''
+    })
     this.props.history.push('/')
   }
 
-  handleChange = event => {
+  handleChange = ({ target }) => {
+    const { name, value } = target
     this.setState({
-      tag: event.target.value
+      [name]: value
     })
   }
 
@@ -44,15 +51,17 @@ class CreateNote extends Component {
             <h2 className='label-h2'>Create New Note:</h2>
           </label>
           <input
+            name='title'
             className='input-title form-control'
             type='text'
             placeholder='Note Title'
-            onChange={this.props.newTitle}
-            value={this.props.title}
+            onChange={this.handleChange}
+            value={this.state.title}
           />
           <section>
             <label className='label-tag'>Add Tag:</label>
             <input
+              name='tag'
               className='input-tag'
               type='text'
               placeholder='Note Tag'
@@ -82,11 +91,12 @@ class CreateNote extends Component {
             ))}
           </section>
           <textarea
+            name='content'
             className='input-body mt-3'
             type='textarea'
             placeholder='Note Content'
-            onChange={this.props.newContent}
-            value={this.props.content}
+            onChange={this.handleChange}
+            value={this.state.content}
           />
           <button className='sav-btn' type='submit' onClick={this.handleSubmit}>
             Save
@@ -97,4 +107,4 @@ class CreateNote extends Component {
   }
 }
 
-export default withRouter(CreateNote)
+export default CreateNote

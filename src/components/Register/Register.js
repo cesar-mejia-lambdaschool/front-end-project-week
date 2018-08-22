@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { Button } from 'reactstrap'
 import './Register.css'
@@ -67,4 +66,4 @@ class Register extends React.Component {
   }
 }
 
-export default withRouter(Register)
+export default Register

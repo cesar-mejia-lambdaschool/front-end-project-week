@@ -1,35 +1,37 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button, Modal, ModalBody, ModalFooter, Badge } from 'reactstrap'
+
 import './ViewNote.css'
 
 class ViewNote extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      modal: false
-    }
-
-    this.toggle = this.toggle.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
+  state = {
+    modal: false
   }
 
-  handleDelete (event) {
-    this.props.deleteNote(this.props.note.id)
+  handleDelete = event => {
+    this.props.deleteNote(this.props.match.params.id)
     this.props.history.push('/')
   }
 
-  toggle () {
+  toggle = () => {
     this.setState({
       modal: !this.state.modal
     })
+  }
+
+  componentWillMount () {
+    this.props.fetchNote(this.props.match.params.id)
   }
 
   render () {
     return (
       <div className='ViewNote'>
         <div className='note-form'>
-          <Link className='note-edit' to={`/update/${this.props.note.id}`}>
+          <Link
+            className='note-edit'
+            to={`/update/${this.props.match.params.id}`}
+          >
             edit
           </Link>
           <button className='note-delete' onClick={this.toggle}>
@@ -85,4 +87,4 @@ class ViewNote extends Component {
   }
 }
 
-export default withRouter(ViewNote)
+export default ViewNote
