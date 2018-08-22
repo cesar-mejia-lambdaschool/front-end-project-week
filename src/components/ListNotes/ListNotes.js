@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
@@ -63,14 +63,19 @@ class ListNotes extends Component {
     return (
       <section className='ListNotes m-0 p-0'>
         {this.props.username
-          ? <input
-            type='text'
-            className='search-bar'
-            placeholder='search'
-            name='search'
-            value={this.state.search}
-            onChange={this.onSearch}
-          />
+          ? <Fragment>
+            <input
+              type='text'
+              className='search-bar'
+              placeholder='search'
+              name='search'
+              value={this.state.search}
+              onChange={this.onSearch}
+            />
+            <button onClick={() => this.setState({ search: '' })}>
+                CLEAR
+            </button>
+          </Fragment>
           : null}
         <Modal
           className='modal-modal'
