@@ -73,7 +73,7 @@ class ListNotes extends Component {
               onChange={this.onSearch}
             />
             <Button
-              style={{ margin: '0 10px' }}
+              style={{ margin: '20px 20px 0px', height: '40px' }}
               color='primary'
               onClick={() => this.setState({ search: '' })}
             >
