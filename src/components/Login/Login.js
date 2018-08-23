@@ -100,12 +100,12 @@ class Login extends React.Component {
 
         // Ease into the new speed
         var desiredSpeed = 0.012
-        speed += (desiredSpeed - speed) * 0.01
+        speed += (desiredSpeed - speed) * 0.05
         timer += speed
       } else {
         // Ease back to the original opacity
         var originalOpacity = 1
-        opacity += (originalOpacity - opacity) * 0.01
+        opacity += (originalOpacity - opacity) * 0.08
         c.fillStyle = 'rgba(18, 18, 18, ' + opacity + ')'
 
         // Ease back to the original speed
@@ -132,7 +132,7 @@ class Login extends React.Component {
     })
 
     window.addEventListener('mouseup', function () {
-      isMouseDown = false
+      isMouseDown = true
     })
 
     animate()
