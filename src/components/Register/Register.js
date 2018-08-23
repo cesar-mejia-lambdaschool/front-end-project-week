@@ -69,6 +69,8 @@ class Register extends React.Component {
   }
 
   onSubmit = user => {
+    this.setState({ loading: true })
+
     axios
       .post(`${serverURL}/api/register`, user)
       .then(response => {
