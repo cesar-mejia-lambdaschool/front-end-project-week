@@ -26,7 +26,10 @@ class Layout extends Component {
   render () {
     return (
       <div className='Layout'>
-        <NavBar />
+        {this.props.location.pathname === '/login' ||
+          this.props.location.pathname === '/register'
+          ? null
+          : <NavBar />}
         <Switch>
           <Route exact path='/' render={props => <ListNotes {...props} />} />
           <Route path='/create' render={props => <CreateNote {...props} />} />

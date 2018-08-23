@@ -1,10 +1,11 @@
 .Register {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   height: 100vh;
   width: 100%;
   background-color: #f3f3f3;
-  padding-top: 50px;
+  overflow: hidden;
+  margin:0;
 }
 
 .dangerBorder {
@@ -13,4 +14,13 @@
 
 .dangerText {
   color: red
+}
+
+.RegisterForm {
+  position: absolute;
+  z-index: 1000;
+  top: 20%;
+  left: 37%;
+  background: lightgray;
+  border-radius: 10px;
 }

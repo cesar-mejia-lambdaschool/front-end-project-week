@@ -4,6 +4,22 @@
   height: 100vh;
   width: 100%;
   background-color: #f3f3f3;
-  padding-left: 30px;
-  padding-top: 20px;
+  overflow: hidden;
+  margin:0;
+}
+
+canvas {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin:0;
+}
+
+.LoginForm {
+  position: absolute;
+  z-index: 1000;
+  top: 20%;
+  left: 37%;
+  background: lightgray;
+  border-radius: 10px;
 }
