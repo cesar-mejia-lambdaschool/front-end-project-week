@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import { Modal, ModalBody, ModalFooter, Button, Badge } from 'reactstrap'
 
-import { clearState, fetchNotes } from '../../actions'
+import { clearState, fetchNotes, clearNote } from '../../actions'
 import './ListNotes.css'
 
 class ListNotes extends Component {
@@ -46,6 +46,11 @@ class ListNotes extends Component {
     })
   }
 
+  componentDidMount () {
+    this.props.fetchNotes()
+    this.props.clearNote()
+  }
+
   render () {
     const { search } = this.state
     const filteredNotes = this.props.notes.filter(note => {
@@ -73,7 +78,12 @@ class ListNotes extends Component {
               onChange={this.onSearch}
             />
             <Button
-              style={{ margin: '20px 20px 0px', height: '40px' }}
+              style={{
+                margin: '20px 20px 0px',
+                height: '35px',
+                background: 'RGB(54, 192, 195)',
+                border: '1px solid RGB(151, 151, 151)'
+              }}
               color='primary'
               onClick={() => this.setState({ search: '' })}
             >
@@ -126,17 +136,20 @@ class ListNotes extends Component {
                       : note.title}
                   </h4>
                 </Link>
-                <span className='card-text px-2'>
-                  {note.content.length >= 175
-                    ? note.content.substr(0, 175) + ' ...'
+                <div className='card-text px-2'>
+                  {note.content.length >= 200
+                    ? note.content.substr(0, 200) + ' ...'
                     : note.content}
-                </span>
+                </div>
               </div>
               <div className='card-footer m-0 px-0 py-1'>
                 {note.tags.map((tag, index) => (
                   <Badge
                     pill
-                    color='primary'
+                    style={{
+                      background: 'RGB(54, 192, 195)',
+                      border: '1px solid RGB(151, 151, 151)'
+                    }}
                     className='ml-1 badge-tag'
                     key={tag.value + index}
                     onClick={() => {
@@ -158,4 +171,6 @@ class ListNotes extends Component {
 const mapStateToProps = ({ username, notes }) => {
   return { username, notes }
 }
-export default connect(mapStateToProps, { clearState, fetchNotes })(ListNotes)
+export default connect(mapStateToProps, { clearState, fetchNotes, clearNote })(
+  ListNotes
+)

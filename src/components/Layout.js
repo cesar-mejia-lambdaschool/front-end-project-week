@@ -15,8 +15,12 @@ import { fetchNotes, fetchNote } from '../actions'
 import './Layout.css'
 
 class Layout extends Component {
-  componentDidMount () {
-    if (localStorage.getItem('authorization')) this.props.fetchNotes()
+  // componentDidMount () {
+  //   if (localStorage.getItem('authorization')) this.props.fetchNotes()
+  // }
+
+  componentWillUnmount () {
+    this.props.clearState()
   }
 
   render () {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Modal, ModalBody, ModalFooter, Badge } from 'reactstrap'
 
-import { deleteNote, fetchNote } from '../../actions'
+import { deleteNote, fetchNote, clearNote } from '../../actions'
 import './ViewNote.css'
 
 class ViewNote extends Component {
@@ -23,9 +23,15 @@ class ViewNote extends Component {
     })
   }
 
-  componentWillMount () {
-    this.props.fetchNote(this.props.match.params.id).then(x => {})
+  componentDidMount () {
+    this.props.fetchNote(this.props.match.params.id)
   }
+
+  componentWillUnMount () {
+    console.log('clearing note')
+    this.props.clearNote()
+  }
+
   render () {
     return (
       <div className='ViewNote'>
@@ -72,12 +78,15 @@ class ViewNote extends Component {
           {this.props.note.content}
         </p>
         <hr />
-        <section>
+        <section style={{ marginLeft: '20px' }}>
           {this.props.note.tags
             ? this.props.note.tags.map((tag, index) => (
               <Badge
                 pill
-                color='primary'
+                style={{
+                  background: 'RGB(54, 192, 195)',
+                  border: '1px solid RGB(151, 151, 151)'
+                }}
                 className='ml-1'
                 key={tag.value + index}
               >
@@ -93,4 +102,6 @@ class ViewNote extends Component {
 const mapStateToProps = ({ note }) => {
   return { note }
 }
-export default connect(mapStateToProps, { deleteNote, fetchNote })(ViewNote)
+export default connect(mapStateToProps, { deleteNote, fetchNote, clearNote })(
+  ViewNote
+)

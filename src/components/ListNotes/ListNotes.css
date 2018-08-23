@@ -73,7 +73,7 @@
   align-self: center;
   width: 50%;
   max-width: 600px;
-  min-width: 260px;
+  min-width: 100px;
 }
 
 .card-text {
@@ -86,4 +86,9 @@
   min-height: 30px !important;
   display: flex;
   overflow-x: auto;
+}
+
+.badge-tag:hover {
+  border: black 1px solid !important;
+  cursor: pointer;
 }

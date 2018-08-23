@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
 import axios from 'axios'
-import { Button } from 'reactstrap'
 
 import { fetchNotes } from '../../actions'
 import './Register.css'
@@ -10,53 +10,64 @@ import './Register.css'
 const serverURL = 'https://lambda-notes-apiserver.herokuapp.com'
 
 class Register extends React.Component {
-  state = {
-    username: '',
-    password: ''
+  renderField (field) {
+    let dangerBorder = field.meta.touched && field.meta.error
+      ? 'dangerBorder'
+      : ''
+
+    let dangerText = field.meta.touched && field.meta.error ? 'dangerText' : ''
+
+    return (
+      <div className={`form-group`}>
+        <label>{field.label}</label>
+        <input
+          className={`form-control ${dangerBorder}`}
+          type={field.type}
+          {...field.input}
+        />
+        <div className={`text-help ${dangerText}`}>
+          {field.meta.touched ? field.meta.error : ''}
+        </div>
+      </div>
+    )
   }
 
   render () {
+    const { handleSubmit } = this.props
     return (
       <div className='Register'>
-        <h2>Register:</h2>
-        <form onSubmit={this.submitHandler}>
-          <div className='form-row'>
-            <label>Username</label>
-            <input
-              name='username'
-              value={this.state.username}
-              onChange={this.inputHandler}
-              type='text'
-            />
-          </div>
-          <div className='form-row'>
-            <label>Password</label>
-            <input
-              name='password'
-              value={this.state.password}
-              onChange={this.inputHandler}
-              type='password'
-            />
-          </div>
-          <div className='form-row'>
-            <Button color='success' type='submit'>
-              Register
-            </Button>
-          </div>
+        <form onSubmit={handleSubmit(this.onSubmit)} style={{ width: '300px' }}>
+          <h2>Register Account:</h2>
+          <Field
+            label='Username'
+            name='username'
+            type='text'
+            component={this.renderField}
+          />
+          <Field
+            label='Password'
+            name='password'
+            type='password'
+            component={this.renderField}
+          />
+          <Field
+            label='Verify Password'
+            name='verify'
+            type='password'
+            component={this.renderField}
+          />
+          <button type='submit' className='btn btn-primary'>Submit</button>
+          <h5 style={{ marginTop: '20px' }}>
+            {this.state.loading && 'Loading page ... Please Wait.'}
+          </h5>
         </form>
       </div>
     )
   }
 
-  inputHandler = ({ target }) => {
-    const { name, value } = target
-    this.setState({ [name]: value })
-  }
-
-  submitHandler = event => {
-    event.preventDefault()
+  onSubmit = user => {
     axios
-      .post(`${serverURL}/api/register`, this.state)
+      .post(`${serverURL}/api/register`, user)
       .then(response => {
         localStorage.setItem('authorization', `Bearer ${response.data.token}`)
         console.log('in first then')
@@ -75,4 +86,22 @@ class Register extends React.Component {
   }
 }
 
-export default connect(null, { fetchNotes })(Register)
+const validate = values => {
+  const { username, password, verify } = values
+  const errors = {}
+  if (!username || username.length < 3 || username.length > 20) {
+    errors.username = 'Enter a username that is between 3 and 20 characters.'
+  }
+  if (!password || password.length < 3 || password.length > 20) {
+    errors.password = 'Enter a password that is between 3 and 20 characters.'
+  }
+  if (password !== verify || !verify) {
+    errors.verify = 'Passwords do not match!'
+  }
+
+  return errors
+}
+
+export default reduxForm({ validate, form: 'RegisterForm' })(
+  connect(null, { fetchNotes })(Register)
+)

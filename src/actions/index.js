@@ -3,6 +3,7 @@ import {
   FETCH_NOTES,
   FETCH_NOTE,
   SET_USERNAME,
+  CLEAR_NOTE,
   CLEAR_NOTES,
   CLEAR_USERNAME,
   CREATE_NOTE,
@@ -58,6 +59,11 @@ export const updateNote = note => async dispatch => {
   })
   dispatch({ type: UPDATE_NOTE, payload: res.data })
 }
+
+export const clearNote = () => dispatch => {
+  dispatch({ type: CLEAR_NOTE, payload: {} })
+}
+
 export const clearState = () => dispatch => {
   dispatch({ type: CLEAR_NOTES, payload: [] })
   dispatch({ type: CLEAR_USERNAME, payload: '' })

@@ -30,7 +30,7 @@
 }
 
 .input-body {
-  height: 400px;
+  height: 400px !important;
   max-width: 600px;
   width: 100%;
   border: 2px solid RGB(174, 174, 174);
