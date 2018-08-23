@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
@@ -205,6 +205,7 @@ class Login extends React.Component {
   }
 
   onSubmit = user => {
+    console.log('should be warping')
     this.setState({ loading: true })
     axios
       .post(`${serverURL}/api/login`, user)
