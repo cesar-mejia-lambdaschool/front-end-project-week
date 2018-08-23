@@ -7,7 +7,7 @@ import { fetchNotes } from '../../actions'
 import './Register.css'
 
 // const serverURL = 'https://lambda-notes-server.herokuapp.com'
-const serverURL = 'https://lambda-notes-apiserver.herokuapp.com/'
+const serverURL = 'https://lambda-notes-apiserver.herokuapp.com'
 
 class Register extends React.Component {
   state = {

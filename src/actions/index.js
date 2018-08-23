@@ -10,7 +10,7 @@ import {
   UPDATE_NOTE
 } from './types'
 
-const serverURL = 'https://lambda-notes-apiserver.herokuapp.com/'
+const serverURL = 'https://lambda-notes-apiserver.herokuapp.com'
 
 export const fetchNotes = () => async dispatch => {
   const token = localStorage.getItem('authorization')
