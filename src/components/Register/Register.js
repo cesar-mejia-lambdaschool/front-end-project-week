@@ -208,7 +208,7 @@ class Register extends React.Component {
           >
             Submit
           </button>
-          <h5 style={{ marginTop: '20px' }}>
+          <h5 style={{ marginTop: '20px', textAlign: 'center' }}>
             {this.state.loading && 'Loading page ... Please Wait.'}
           </h5>
         </form>
