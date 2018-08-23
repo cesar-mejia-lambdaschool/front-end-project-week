@@ -10,6 +10,9 @@ import './Register.css'
 const serverURL = 'https://lambda-notes-apiserver.herokuapp.com'
 
 class Register extends React.Component {
+  state = {
+    loading: false
+  }
   renderField (field) {
     let dangerBorder = field.meta.touched && field.meta.error
       ? 'dangerBorder'
