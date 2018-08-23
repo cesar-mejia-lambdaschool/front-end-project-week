@@ -19,6 +19,10 @@ class Layout extends Component {
   //   if (localStorage.getItem('authorization')) this.props.fetchNotes()
   // }
 
+  componentDidMount () {
+    this.props.fetchNotes()
+  }
+
   componentWillUnmount () {
     this.props.clearState()
   }
