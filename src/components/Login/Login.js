@@ -90,7 +90,6 @@ class Login extends React.Component {
 
     function animate () {
       window.requestAnimationFrame(animate)
-
       c.save()
       if (isMouseDown === true) {
         // Ease into the new opacity
