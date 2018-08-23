@@ -7,7 +7,7 @@ import { fetchNotes } from '../../actions'
 import './Register.css'
 
 // const serverURL = 'https://lambda-notes-server.herokuapp.com'
-const serverURL = 'https://secure-waters-21665.herokuapp.com'
+const serverURL = 'https://lambda-notes-apiserver.herokuapp.com/'
 
 class Register extends React.Component {
   state = {
@@ -49,8 +49,6 @@ class Register extends React.Component {
   }
 
   inputHandler = ({ target }) => {
-    // #inputHandler receives event object by default
-    // #line48 destructures target from event
     const { name, value } = target
     this.setState({ [name]: value })
   }
