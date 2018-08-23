@@ -147,7 +147,7 @@ class Login extends React.Component {
 
     return (
       <div className={`form-group`}>
-        <label style={{fontWeight: 'bold'}}>{field.label}</label>
+        <label style={{ fontWeight: 'bold' }}>{field.label}</label>
         <input
           className={`form-control ${dangerBorder}`}
           type={field.type}
@@ -197,8 +197,8 @@ class Login extends React.Component {
           >
             Submit
           </button>
-          <h5 style={{ marginTop: '20px' }}>
-            {this.state.loading && 'Loading page ...Please Wait.'}
+          <h5 style={{ marginTop: '20px', textAlign: 'center' }}>
+            {this.state.loading && 'Loading page ... Please Wait.'}
           </h5>
         </form>
       </div>
