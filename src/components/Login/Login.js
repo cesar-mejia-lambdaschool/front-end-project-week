@@ -130,8 +130,8 @@ class Login extends React.Component {
       isMouseDown = true
     })
 
-    window.addEventListener('mouseup', function () {
-      isMouseDown = true
+    window.addEventListener('beforeunload', function () {
+      isMouseDown = false
     })
 
     animate()
